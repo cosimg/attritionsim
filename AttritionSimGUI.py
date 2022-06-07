@@ -236,9 +236,9 @@ def run_simulation_gui(blue_force, red_force, max_steps=max_steps):
             )
 
         # Update stored outputs
-        blue.append(len(blue_force.units)) #<--------------------------------TODO no putput function yet
+        blue.append(len(blue_force.units)) # For a future output functionality
         red.append(len(red_force.units))     
-        #sleep(sec_per_step)   #<----------------------------------------------------------------TODO still freezing the gui
+        #sleep(sec_per_step)
 
 
 # Main
