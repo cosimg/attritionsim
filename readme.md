@@ -1,15 +1,15 @@
 # Attrition Simulator
 
-**Version:** 0.3
-**Date:** 2022-06-05
-**Contributors:** Steffen Pielström
+- **Version:** 0.3
+- **Date:** 2022-06-05
+- **Contributors:** Steffen Pielström
 
 *Attrition Simulator* is a programme for agent-based simulations of attrition warfare. It is inspired by the classical Lanchester Laws of attrition, but follows an alternative, individual-based, stochastic modeling approach based on modeling individual units and their probability to eliminate an enemy unit.
 
 
 ## Technical overview
 
-The Attrition Simulator is based on a **Python module** (`AttritionSim.py`) that can be used directly to script experiments. The module provides a basic 'unit' class to model units with particular attributes and a 'force' class to model a fighting force of multiple unit class objects. Furthermore there are functions that to create two opposing forces, have them fight each other and print the results. **Simulation parameters** can be set either as arguments to the functions and methods or by manipulating the configuration file `config.py`.
+The Attrition Simulator is based on a **Python module** (`AttritionSim.py`) that can be used directly to script experiments. The module provides a basic 'unit' class to model units with particular attributes and a 'force' class to model a fighting force of multiple unit class objects. Furthermore, there are functions that create two opposing forces, have them fight each other and print the results. **Simulation parameters** can be set either as arguments to the functions and methods, or by manipulating the configuration file `config.py`.
 
 The file `AttritionSimCLI.py` provides a **command line interface** that can pass simulation parameters as arguments.
 
@@ -48,7 +48,7 @@ Now, you can use the function `update_forces()` to run single iterations.
 ```
 >>> sim.update_forces(blue_force, red_force)
 ```
-Alternatively, you can run an **entire simulation* with initialization and multiple steps with the function `run_simulation()` and return the results. (Please note this is a stochastic simulation, actual output values will not equal the ones shown here an vary with each run.)
+Alternatively, you can run an **entire simulation** with initialization and multiple steps with the function `run_simulation()` and return the results. (Please note this is a stochastic simulation, actual output values will not equal the ones shown here and vary with each run.)
 ```
 >>> sim.run_simulation(Strength=[10, 5], Accuracy=[0.05, 0.1])
 steps: 28
