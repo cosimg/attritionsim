@@ -36,7 +36,7 @@ firing_distance: float = 0.5 # a proportion between 0 and 1
 
 # System variables
 # ----------------------------------------------------------------------------------
-# Change only if you want to mess with the sytem!
+# Change only if you want to mess with the system!
 
 Faction: List[int] = [0, 1]
 Name: List[str] = ['Blue', 'Red']
