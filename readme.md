@@ -19,7 +19,7 @@ For playing and exploration, there is a **graphical user interface** based on th
 
 (Currently only for *Linux*, a *Windows* version is in the making) **Download** the latest release of the standalone GUI version from [release section](https://github.com/cosimg/attritionsim/releases/tag/v0.3), **unzip** and **open** the folder, then execute the file called ***AttritionSimGui***. Depending on your operating system, it might be necessary to mark the file as executable first.
 
-![](GUI03Screenshot.jpg
+![](GUI03Screenshot.jpg)
 
 
 ## How to use it: the nerd way
