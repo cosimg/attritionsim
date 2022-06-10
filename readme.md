@@ -13,11 +13,13 @@ The Attrition Simulator is based on a **Python module** (`AttritionSim.py`) that
 
 The file `AttritionSimCLI.py` provides a **command line interface** that can pass simulation parameters as arguments.
 
-For playing and exploration, there is a **graphical user interface** based on the *PySimpleGui* package. We provide a version packaged with *pyinstaller* for *Linux* and *Windows* in a *zip* file for download.
+For playing and exploration, there is a **graphical user interface** based on the [*PySimpleGui*](https://pysimplegui.readthedocs.io/) package. We provide a version packaged with *pyinstaller* for *Linux* and *Windows* in a *zip* file for download.
 
 ## How to use it: the easy way
 
-**Download** the latest release of the standalone GUI version from [cosimg.github.io/attritionsim](cosimg.github.io/attritionsim), **unzip** and **open** the folder, then execute the file called ***AttritionSimGui***. Depending on your operating system, it might be necessary to mark the file as executable first.
+(Currently only for *Linux*, a *Windows* version is in the making) **Download** the latest release of the standalone GUI version from [release section](https://github.com/cosimg/attritionsim/releases/tag/v0.3), **unzip** and **open** the folder, then execute the file called ***AttritionSimGui***. Depending on your operating system, it might be necessary to mark the file as executable first.
+
+![](GUI03Screenshot.jpg
 
 
 ## How to use it: the nerd way
