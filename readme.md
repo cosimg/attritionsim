@@ -17,7 +17,7 @@ For playing and exploration, there is a **graphical user interface** based on th
 
 ## How to use it: the easy way
 
-(Currently only for *Linux*, a *Windows* version is in the making) **Download** the latest release of the standalone GUI version from [release section](https://github.com/cosimg/attritionsim/releases/tag/v0.3), **unzip** and **open** the folder, then execute the file called ***AttritionSimGui***. Depending on your operating system, it might be necessary to mark the file as executable first.
+(Currently only for *Linux*, a *Windows* version is in the making) **Download** the latest release of the standalone GUI version from [release section](https://github.com/cosimg/attritionsim/releases/tag/v0.3) and execute the file ***AttritionSimGui***. Depending on your operating system, it might be necessary to mark the file as executable first.
 
 ![](GUI03Screenshot01.jpg)
 
@@ -91,9 +91,9 @@ $ python AttritionSimGUI.py
 I am more than happy to accept pull requests with bug fixed, typo corrections, code (and aesthetic) improvements and added features. I only kindly request you to adehere at least to the bare minimum of good conduct regarding modularity, comments, documentation, doctests, cetera that I have been able to instill so far. The standalone GUI version is made with *pyinstaller*:
 ```
 $ pip install pyinstaller
-$ pyinstaller AttritionSimGUI.py
+$ pyinstaller -F AttritionSimGUI.py
 ```
-
+Note that *pyinstaller* can create a standalone program only for the operating system it is running on.
 
 ## TODOs and known issues
 
