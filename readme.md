@@ -97,6 +97,7 @@ Note that *pyinstaller* can create a standalone program only for the operating s
 
 ## TODOs and known issues
 
+- Optimize run_simulation() output for python scripting: Output should be handled in an 'output' object, that is returned entirely by the function by default.
 - GUI Timing: show each simulation step live in the GUI application and synchronize with system time, so that a step in the simulation lasts the nth fraction of a second.
 - Battle field size: add the possibility to alter the size of the battle field as a simulation paramter. Currently, the simulation is always running on a 100 x 100 length units grid. 
 - Formations: implement more formations than 'one line'
