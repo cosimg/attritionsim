@@ -1,6 +1,6 @@
 # Attrition Simulator
 
-- **Version:** 0.3
+- **Version:** 0.4
 - **Date:** 2022-06-05
 - **Contributors:** Steffen Pielström
 
@@ -30,7 +30,51 @@ Download the module [https://github.com/cosimg/attritionsim](https://github.com/
 ```
 import AttritionSim as sim
 ```
-Create a blue force with 10 units and 5% chance to hit the enemy, and initialize its units.
+The simplest way to use the module is to rely on the wrapper function `run_simulation()` that will run an entire simulation for you.
+```
+>>> sim.run_simulation()
+<AttritionSim.output object at 0x7fc47658d5b0>
+```
+
+Simulation parameters can be specified as arguments that are typically organized in pairs specifying values for both of the opposing forces. You can specify:
+
+- `max_steps`: The maximum number of steps the simulation will run.
+- `strength`: The initial numerical strengths of both forces.
+- `range`: The firing ranges of both forces.
+- `accuracy`: The probabilities to hit the current target in a given time step.
+- `formation`: The opposing forces' initial spatial layout. Currently, 'one line' is the only option implemented.
+
+For instance, you can run a simulation with one force haveing twice the numbers, the other force twice the accuracy, like this:
+```
+>>> sim.run_simulation(Strength=[10, 5], Accuracy=[0.05, 0.1])
+<AttritionSim.output object at 0x7fc4766814c0>
+```
+
+Alternatively, there is the option to control paramters by changing the **configuration file** `config.py`.
+
+No matter where the parameters come from, the function **returns an object** containing simulation paramters and results. The most important attributes are:
+
+- `steps`: The number of steps the simulation has run.
+- `blue`: A list containg the numerical strength of the first force at each step of the simulation.
+- `red`: The same for the other force.
+
+As an example, you can access the strength values for the blue force at each step like this:
+```
+>>> my_result = sim.run_simulation(Strength=[10, 5], Range=[200, 200])
+>>> my_result.blue
+[10, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 7, 7, 7, 7, 7]
+```
+
+And, correspondingly, for the opposing red force:
+```
+>>> my_result.red
+[5, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 0]
+```
+
+#### Deeper in the rabbit hole...
+The module is based on a `unit` class that allows to define unit objects that have certain attributes and try to kill each other in each step of the simulation. Additionally, there is a `force` class, that is, basically, a list of units and some attributes shared by all of them.
+
+so, if you do not want the global function `run_sumulation()` to handle everything for you, you can create a blue force on your own; here with 10 units and 5% chance to hit the enemy, and initialize its units.
 ```
 >>> blue_force = sim.force(0, 'blue', strength=10, accuracy=0.05)
 >>> blue_force.initialize_units()
@@ -49,14 +93,6 @@ Create a red force with less men that shoot better.
 Now, you can use the function `update_forces()` to run single iterations.
 ```
 >>> sim.update_forces(blue_force, red_force)
-```
-Alternatively, you can run an **entire simulation** with initialization and multiple steps with the function `run_simulation()` and return the results. (Please note this is a stochastic simulation, actual output values will not equal the ones shown here and vary with each run.)
-```
->>> sim.run_simulation(Strength=[10, 5], Accuracy=[0.05, 0.1])
-steps: 28
-result: Blue victory
-Blue force strength: 7
-Red force strength: 0
 ```
 
 ### with the Command Line Interface
@@ -97,7 +133,6 @@ Note that *pyinstaller* can create a standalone program only for the operating s
 
 ## TODOs and known issues
 
-- Optimize run_simulation() output for python scripting: Output should be handled in an 'output' object, that is returned entirely by the function by default.
 - GUI Timing: show each simulation step live in the GUI application and synchronize with system time, so that a step in the simulation lasts the nth fraction of a second.
 - Battle field size: add the possibility to alter the size of the battle field as a simulation paramter. Currently, the simulation is always running on a 100 x 100 length units grid. 
 - Formations: implement more formations than 'one line'

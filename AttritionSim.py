@@ -335,11 +335,72 @@ class force():
                 self.units.remove(element)
 
 
+class output():
+    '''
+    Version: 0.1
+    Authors: Steffen Pielström
+
+    The output class object stores all information that may be returned 
+    as output after a simulation.
+    '''
+    def __init__(self, name=Name, strength=Strength, range=Range, 
+                speed=Speed, accuracy=Accuracy, formation=Formation):
+
+        self.name = name
+        self.strength = strength
+        self.range = range
+        self.speed = speed
+        self.accuracy = accuracy
+        self.formation = formation
+        self.steps = 0
+        self.blue = []
+        self.red = []
+
+
+    def update(self):
+        '''
+        Track the strength development in each step of the simulation.
+        '''
+        self.steps += 1
+        self.blue.append(len(blue_force.units))
+        self.red.append(len(red_force.units))
+
+    def print(self, type='result'):
+        '''
+        Print formatted output.
+        '''
+
+        if type == 'result':
+            steps = 'steps: '+str(self.steps)
+            if self.blue[-1] == 0 and self.red[-1] > 0:
+                result = 'result: '+Name[1]+' victory'
+            elif self.blue[-1] > 0 and self.red[-1] == 0:
+                result = 'result: '+Name[0]+' victory'
+            elif self.blue[-1] == 0 and self.red[-1] == 0:
+                result = 'result: both forces down'
+            else:
+                result = 'result: no winner yet'
+            blue = self.name[0]+' force strength: '+str(self.blue[-1])
+            red = self.name[1]+' force strength: '+str(self.red[-1])
+            print(steps+'\n'+result+'\n'+blue+'\n'+red)
+
+        elif type == 'full':
+            values = ''
+            for i in range(len(self.blue)):
+                values += '\n' + str(self.blue[i]) + ',' + str(self.red[i])
+            print(self.name[0]+','+self.name[1]+ values)
+
+        else:
+            print('Warning: Output format \''+str(output)+'\' unknown.')
+            print('Specify as either \'result\' or \'full\'')
+
+
+
 # Functions
 # --------------------------------------------------------------------
 
-def initialize(Faction=Faction, Name=Name, Color=Color, Strength=Strength, 
-    Range=Range, Speed=Speed, Accuracy=Accuracy, Formation=Formation):
+def initialize(faction=Faction, name=Name, color=Color, strength=Strength, 
+    range=Range, speed=Speed, accuracy=Accuracy, formation=Formation):
     '''
     Version: 0.1
     Authors: Steffen Pielström
@@ -353,14 +414,17 @@ def initialize(Faction=Faction, Name=Name, Color=Color, Strength=Strength,
     ##[10, 9.090909090909092]
     '''
     global blue_force
-    blue_force = force(Faction[0], Name[0], Color[0], Strength[0], Range[0], Speed[0], 
-    Accuracy[0], Formation[0])
+    blue_force = force(faction[0], name[0], color[0], strength[0], range[0], speed[0], 
+    accuracy[0], formation[0])
     blue_force.initialize_units()
 
     global red_force
-    red_force = force(Faction[1], Name[1], Color[1], Strength[1], Range[1], Speed[1], 
-    Accuracy[1], Formation[1])
+    red_force = force(faction[1], name[1], color[1], strength[1], range[1], speed[1], 
+    accuracy[1], formation[1])
     red_force.initialize_units()
+
+    global results
+    results = output()
 
 
 def update_forces(blue_force, red_force):
@@ -390,90 +454,40 @@ def update_forces(blue_force, red_force):
     blue_force.kill_hit_units()
     red_force.kill_hit_units()
 
-def print_result(steps):
+
+def run_simulation(max_steps=max_steps, output='return', faction=Faction, name=Name,
+    color=Color, strength=Strength, range=Range, speed=Speed, accuracy=Accuracy,
+    formation=Formation):
     '''
-    Version: 0.1
-    Authors: Steffen Pielström
-    
-    Basic output of simulation results. This function is called after 
-    the end of a simulaton to print the remaining strengths (number of
-    units) of the respective forces. It also prints the number of 
-    simulation steps that have been simulated.
-
-    See also: print_full()
-    '''
-    steps = 'steps: '+str(steps)
-    if len(blue_force.units) == 0 and len(red_force.units) > 0:
-        result = 'result: '+Name[1]+' victory'
-    elif len(blue_force.units) > 0 and len(red_force.units) == 0:
-        result = 'result: '+Name[0]+' victory'
-    elif len(blue_force.units) == 0 and len(red_force.units) == 0:
-        result = 'result: both forces down'
-    else:
-        result = 'result: no winner yet'
-    blue = Name[0]+' force strength: '+str(len(blue_force.units))
-    red = Name[1]+' force strength: '+str(len(red_force.units))
-    print(steps+'\n'+result+'\n'+blue+'\n'+red)
-
-
-def print_full(blue, red, name): 
-    '''
-    Version: 0.1
-    Authors: Steffen Pielström
-
-    This is an alternative function for returning simulation results as
-    output. It will print a full table containing the strength of each 
-    force at every step of the simulation.
-
-    See also: print_result()
-    '''
-    values = ''
-    for i in range(len(blue)):
-        values += '\n' + str(blue[i]) + ', ' + str(red[i])
-    print(name[0]+', '+name[1]+ values)
-
-
-def run_simulation(max_steps=max_steps, output='result', Faction=Faction, Name=Name,
-    Color=Color, Strength=Strength, Range=Range, Speed=Speed, Accuracy=Accuracy,
-    Formation=Formation):
-    '''
-    Version: 0.1
+    Version: 0.3
     Authors: Steffen Pielström
     
     This is the main function calling all methods and functions in the
     module and runnning an antire simulation from initialization to 
     returning the final result.
     '''
-    initialize(Faction=Faction, Name=Name, Color=Color, Strength=Strength, Range=Range, 
-        Speed=Speed, Accuracy=Accuracy,Formation=Formation)
+    initialize(faction=faction, name=name, color=color, strength=strength, range=range, 
+        speed=speed, accuracy=accuracy,formation=formation)
     
     # Initialize loop conditions
-    steps = 0
     conditions = True
-
-    # Initialize lists for output tracking
-    blue = []
-    red = []
 
     # Main loop
     while conditions == True:        
         update_forces(blue_force, red_force)        
-        steps += 1
+        results.update()
+
         conditions = (
             len(blue_force.units) > 0 
             and len(red_force.units) > 0 
-            and steps < max_steps
+            and results.steps < max_steps
             )
-        if output == 'full':
-            blue.append(len(blue_force.units))
-            red.append(len(red_force.units))
-    if output == 'result':
-        print_result(steps)
-    elif output == 'full':
-        print_full(blue, red, Name)
+
+    # Handle results
+    if output == 'return':
+        return results
     else:
-        print('Warning: Output format \''+str(output)+'\' unknown.')
-        print('Specify as either \'result\' or \'full\'')
+        results.print(output)
 
 
 # Use doctest to test functions and methods
@@ -487,3 +501,5 @@ python AttritionSim.py -v
 if __name__ == "__main__":#
     import doctest
     doctest.testmod()
+
+run_simulation()

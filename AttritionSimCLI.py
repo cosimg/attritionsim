@@ -70,10 +70,10 @@ args = parser.parse_args()
 sim.run_simulation(
     max_steps=int(args.max_steps),
     output=args.output, 
-    Name=[args.name_blue, args.name_red],
-    Strength=[int(args.strength_blue), int(args.strength_red)], 
-    Range=[float(args.range_blue), float(args.range_red)],
-    Speed=[float(args.speed_blue), float(args.speed_red)], 
-    Accuracy=[float(args.accuracy_blue), float(args.accuracy_red)],
-    Formation=[args.formation_blue, args.formation_red]
+    name=[args.name_blue, args.name_red],
+    strength=[int(args.strength_blue), int(args.strength_red)], 
+    range=[float(args.range_blue), float(args.range_red)],
+    speed=[float(args.speed_blue), float(args.speed_red)], 
+    accuracy=[float(args.accuracy_blue), float(args.accuracy_red)],
+    formation=[args.formation_blue, args.formation_red]
     )
