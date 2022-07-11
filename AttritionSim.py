@@ -335,12 +335,12 @@ class force():
                 self.units.remove(element)
 
 
-class output():
+class experiment():
     '''
     Version: 0.1
     Authors: Steffen Pielström
 
-    The output class object stores all information that may be returned 
+    The experiment class object stores all information that may be returned 
     as output after a simulation.
     '''
     def __init__(self, name=Name, strength=Strength, range=Range, 
@@ -364,6 +364,7 @@ class output():
         self.steps += 1
         self.blue.append(len(blue_force.units))
         self.red.append(len(red_force.units))
+
 
     def print(self, type='result'):
         '''
@@ -391,7 +392,7 @@ class output():
             print(self.name[0]+','+self.name[1]+ values)
 
         else:
-            print('Warning: Output format \''+str(output)+'\' unknown.')
+            print('Warning: Output format unknown.')
             print('Specify as either \'result\' or \'full\'')
 
 
@@ -424,7 +425,7 @@ def initialize(faction=Faction, name=Name, color=Color, strength=Strength,
     red_force.initialize_units()
 
     global results
-    results = output()
+    results = experiment()
 
 
 def update_forces(blue_force, red_force):
@@ -488,6 +489,62 @@ def run_simulation(max_steps=max_steps, output='return', faction=Faction, name=N
         return results
     else:
         results.print(output)
+
+def run_lanchester(max_steps=max_steps, strength=Strength, value=Accuracy, 
+                type='square', output='return'):
+    '''
+    Version 0.1
+    Authors: Steffen Pielström
+
+    Returns results of a simple Lanchester-law calculation.
+    '''
+
+    global results
+    results = experiment()
+
+    results.accuracy = value
+    results.strength = strength
+    results.range = ['infinite', 'infinite']
+    results.speed =[0, 0]
+    results.blue = [strength[0]]
+    results.red = [strength[1]]
+
+    # Initialize loop conditions
+    steps = 0
+    conditions = True
+
+    # Main loop
+    while conditions == True:
+
+        if type == 'square':
+            results.blue.append(results.blue[-1]-results.red[-1]*value[1])
+            results.red.append(results.red[-1]-results.blue[-1]*value[0])
+        
+        elif type == 'linear':
+            print('Not yet implemented.')
+
+        else:
+            print('Unknown/unimplemented type of deterministic attrition model.')
+               
+        steps += 1
+
+        conditions = (
+            results.blue[-1] > 0 
+            and results.red[-1] > 0 
+            and steps < max_steps
+            )
+
+    if results.blue[-1]<0:
+        results.blue[-1] = 0
+    if results.red[-1]<0:
+        results.red[-1] = 0
+
+    # Handle results
+    if output == 'return':
+        return results
+    else:
+        results.print(output)
+
 
 
 # Use doctest to test functions and methods
