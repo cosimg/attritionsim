@@ -16,7 +16,7 @@ from typing import List
 
 # Unit attributes
 Strength: List[int] = [10, 10]
-Range: List[float] = [50, 50]
+Range: List[float] = [70, 70]
 Speed: List[float] = [1,1]
 Accuracy: List[float] = [0.05, 0.05] # a probabilty between 0 and 1
 Formation: List[str] = ['one line', 'one line'] # more options not yet implemented
