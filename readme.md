@@ -46,7 +46,7 @@ Simulation parameters can be specified as arguments that are typically organized
 
 For instance, you can run a simulation with one force haveing twice the numbers, the other force twice the accuracy, like this:
 ```
->>> sim.run_simulation(Strength=[10, 5], Accuracy=[0.05, 0.1])
+>>> sim.run_simulation(strength=[10, 5], accuracy=[0.05, 0.1])
 <AttritionSim.output object at 0x7fc4766814c0>
 ```
 
@@ -88,7 +88,7 @@ Create a red force with less men that shoot better.
 ```
 **Or** rely on the `initialize()` function to do all that at once.
 ```
->>> sim.initialize(Strength=[10, 5], Accuracy=[0.05, 0.1])
+>>> sim.initialize(strength=[10, 5], accuracy=[0.05, 0.1])
 ```
 Now, you can use the function `update_forces()` to run single iterations.
 ```
