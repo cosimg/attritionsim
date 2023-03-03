@@ -1,26 +1,17 @@
-# This CITATION.cff file was generated with cffinit.
-# Visit https://bit.ly/cffinit to generate yours today!
-
 cff-version: 1.2.0
 title: Attrition Simulator
-message: >-
-  If you use this software, please cite it using the
-  metadata from this file.
+message: If you use this software, please cite it using these metadata.
 type: software
 authors:
-  - given-names: 'Steffen '
+  - given-names: Steffen
     family-names: Pielström
     name-particle: Dr.
     email: pielstroem@biozentrum.uni-wuerzburg.de
     affiliation: University of Würzburg
 repository-code: 'https://github.com/cosimg/attritionsim'
 url: 'https://github.com/cosimg'
-abstract: >-
-  Attrition Simulator is a programme for agent-based
-  simulations of attrition warfare. It is inspired by the
-  classical Lanchester Laws of attrition, but follows an
-  alternative, individual-based, stochastic modeling
-  approach based on modeling individual units and their
+abstract: Attrition Simulator is a programme for agent-based simulations of attrition warfare. It is inspired by the
+  classical Lanchester Laws of attrition, but follows an alternative, individual-based, stochastic modeling approach based on modeling individual units and their
   probability to eliminate an enemy unit.
 keywords:
   - Attrition warfare
@@ -28,5 +19,5 @@ keywords:
   - Agent-Based Modeling (ABM)
   - Lanchester Laws
 license: MIT
-version: 'Version: 0.4'
-date-released: '2022-06-05'
+version: 0.4
+date-released: "2022-06-05"
